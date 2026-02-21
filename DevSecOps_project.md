@@ -1,16 +1,5 @@
-Perfect 👍
-I’ll give you a **complete production SonarQube setup from scratch on Ubuntu (AWS EC2)** — clean, secure, industry-standard.
 
-Assumption:
-
-* Ubuntu 22.04
-* Fresh EC2
-* Public IP
-* You want production-ready setup
-
----
-
-# 🚀 STEP 0 — Create EC2 Properly
+# Create EC2 Properly
 
 Instance:
 
@@ -25,7 +14,7 @@ Instance:
 
 ---
 
-# 🚀 STEP 1 — Update Server
+# STEP 1 — Update Server
 
 ```bash
 sudo apt update && sudo apt upgrade -y
@@ -33,7 +22,7 @@ sudo apt update && sudo apt upgrade -y
 
 ---
 
-# 🚀 STEP 2 — Install Java (Required)
+# STEP 2 — Install Java (Required)
 
 SonarQube requires Java 17.
 
@@ -44,11 +33,11 @@ java -version
 
 ---
 
-# 🚀 STEP 3 — Install Database
+# STEP 3 — Install Database
 
 Use:
 
-## 👉 PostgreSQL
+## PostgreSQL
 
 ```bash
 sudo apt install postgresql postgresql-contrib -y
@@ -80,7 +69,7 @@ GRANT ALL PRIVILEGES ON DATABASE sonarqube TO sonar;
 
 ---
 
-# 🚀 STEP 4 — Linux Kernel Tuning (MANDATORY)
+# STEP 4 — Linux Kernel Tuning (MANDATORY)
 
 Edit:
 
@@ -116,7 +105,7 @@ sonar   -   nproc    4096
 
 ---
 
-# 🚀 STEP 5 — Create Sonar User
+# STEP 5 — Create Sonar User
 
 ```bash
 sudo adduser --system --no-create-home --group --disabled-login sonar
@@ -124,11 +113,11 @@ sudo adduser --system --no-create-home --group --disabled-login sonar
 
 ---
 
-# 🚀 STEP 6 — Download SonarQube
+# STEP 6 — Download SonarQube
 
 Go to:
 
-## 👉 SonarQube
+## SonarQube
 
 ```bash
 cd /opt
@@ -146,7 +135,7 @@ sudo chown -R sonar:sonar /opt/sonarqube
 
 ---
 
-# 🚀 STEP 7 — Configure SonarQube
+# STEP 7 — Configure SonarQube
 
 Edit:
 
@@ -169,7 +158,7 @@ Save.
 
 ---
 
-# 🚀 STEP 8 — Create Systemd Service
+# STEP 8 — Create Systemd Service
 
 ```bash
 sudo nano /etc/systemd/system/sonarqube.service
@@ -212,11 +201,11 @@ sudo systemctl status sonarqube
 
 ---
 
-# 🚀 STEP 9 — Install Reverse Proxy
+# STEP 9 — Install Reverse Proxy
 
 Use:
 
-## 👉 Nginx
+## Nginx
 
 ```bash
 sudo apt install nginx -y
@@ -275,7 +264,7 @@ https://your-domain.com
 
 ---
 
-# 🔒 FINAL SECURITY
+# FINAL SECURITY
 
 AWS Security Group:
 
@@ -306,13 +295,3 @@ PostgreSQL
 ```
 
 ---
-
-If you want next level:
-
-* Setup with Docker?
-* Setup with Kubernetes?
-* Setup behind AWS ALB?
-* High availability cluster version?
-
-Tell me your goal (learning / company prod / enterprise).
-I’ll design enterprise-grade architecture for you 🚀
