@@ -268,6 +268,53 @@ Tool example:
 
 * SonarQube
 
+Key Metrics in Static Analysis
+📊 a) Code Smells
+
+Not bugs — but bad design.
+
+Example:
+
+Long methods
+
+Deep nested if-else
+
+God classes
+
+📊 b) Cyclomatic Complexity
+
+Measures:
+
+How complex a function is.
+
+More if, for, switch → Higher complexity → Harder to maintain.
+
+High complexity increases:
+
+Bug probability
+
+Maintenance cost
+
+📊 c) Code Duplication
+
+Repeated logic in multiple places.
+
+Problem:
+
+If you fix bug in one place, others remain broken.
+
+📊 d) Maintainability Index
+
+Calculated from:
+
+Lines of code
+
+Complexity
+
+Duplication
+
+Score shows how easy future maintenance will be.
+
 ---
 
 ## 4️⃣ Dependency Check
