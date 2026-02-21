@@ -184,3 +184,150 @@ If you want next, I can explain:
 * 💼 SAST/DAST interview questions
 
 Tell me your goal.
+
+
+## Code Quality checks:
+
+No problem 👍 Let’s simplify everything.
+
+## 💡 What are Code Quality Checks?
+
+It just means:
+
+> Checking if your code is **clean, correct, and safe** before deploying.
+
+That’s it.
+
+---
+
+# 🧹 Imagine This
+
+You write code.
+
+Before deploying, we check:
+
+1. ❌ Is there any syntax mistake?
+2. ❌ Is the code messy?
+3. ❌ Are there bugs?
+4. ❌ Is it insecure?
+5. ❌ Are there vulnerable libraries?
+
+If all good → deploy
+If not → fix first
+
+That process = **Code Quality Check**
+
+---
+
+# 🔎 4 Main Types (Very Simple)
+
+## 1️⃣ Linting
+
+Checks style & small mistakes.
+
+Example:
+
+* Unused variable
+* Missing semicolon
+* Wrong indentation
+
+Tool example:
+
+* ESLint
+
+---
+
+## 2️⃣ Unit Testing
+
+Checks if your logic works.
+
+Example:
+You create a function:
+
+```text
+add(2,3)
+```
+
+Test checks:
+Expected result = 5
+If not → fail
+
+---
+
+## 3️⃣ Static Code Analysis
+
+Deeper check.
+
+Finds:
+
+* Big functions
+* Duplicate code
+* Security problems
+
+Tool example:
+
+* SonarQube
+
+---
+
+## 4️⃣ Dependency Check
+
+Checks if libraries have vulnerabilities.
+
+Tool example:
+
+* OWASP Dependency-Check
+
+---
+
+# 🚦 In CI/CD Pipeline
+
+When you push code:
+
+```text
+1. Lint
+2. Test
+3. Quality Scan
+4. Security Scan
+5. Deploy
+```
+
+If any step fails → ❌ Stop
+
+That protects production.
+
+---
+
+# 🧠 Why It Is Important?
+
+Without quality checks:
+
+* More bugs
+* Production failures
+* Security issues
+* Hard maintenance
+
+With quality checks:
+
+* Stable app
+* Clean code
+* Secure deployment
+
+---
+
+# 🎯 One-Line Summary
+
+> Code quality checks = Automatic inspection of your code before deployment to avoid bugs and security issues.
+
+---
+
+Tell me — what part is confusing?
+
+* Lint?
+* SonarQube?
+* Coverage?
+* Technical debt?
+* Quality gate?
+
+I’ll explain only that in very simple way.
+
