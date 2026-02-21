@@ -280,6 +280,44 @@ Tool example:
 
 ---
 
+## 4️⃣ Security Checks (SAST)
+
+Finds:
+
+SQL injection
+
+Hardcoded passwords
+
+XSS
+
+Unsafe deserialization
+
+Example:
+
+SonarQube
+
+Semgrep
+
+This connects quality + security.
+
+## 6️⃣ Performance & Efficiency Checks
+
+Advanced quality includes:
+
+Memory leaks
+
+Inefficient loops
+
+Blocking operations
+
+Slow queries
+
+Tools:
+
+Profilers
+
+Load testing tools
+
 # 🚦 In CI/CD Pipeline
 
 When you push code:
