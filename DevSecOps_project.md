@@ -1,297 +1,244 @@
 
-# Create EC2 Properly
+# 🧩 Tools Used in Real Production
 
-Instance:
-
-* Ubuntu 22.04
-* Minimum: **t3.medium (4GB RAM required)**
-* Security Group:
-
-  * 22 (SSH)
-  * 80 (HTTP)
-  * 443 (HTTPS)
-    ❌ DO NOT open 9000
-
----
-
-# STEP 1 — Update Server
-
-```bash
-sudo apt update && sudo apt upgrade -y
-```
+| Stage            | Tool                        |
+| ---------------- | --------------------------- |
+| SCM              | GitHub / GitLab / Bitbucket |
+| CI               | Jenkins                     |
+| Code Quality     | SonarQube                   |
+| SAST             | SonarQube / Checkmarx       |
+| Dependency Scan  | OWASP Dependency-Check      |
+| Secrets Scan     | Gitleaks                    |
+| Container Build  | Docker                      |
+| Container Scan   | Trivy                       |
+| Artifact Repo    | Nexus / Artifactory         |
+| Registry         | AWS ECR                     |
+| Orchestration    | Kubernetes                  |
+| Runtime Security | Falco                       |
+| Monitoring       | Prometheus + Grafana        |
 
 ---
 
-# STEP 2 — Install Java (Required)
-
-SonarQube requires Java 17.
-
-```bash
-sudo apt install openjdk-17-jdk -y
-java -version
-```
+# 🏗 REAL Production Pipeline Stages
 
 ---
 
-# STEP 3 — Install Database
+## 🔹 1️⃣ PR Validation Pipeline (Feature Branch)
 
-Use:
+Triggered on Pull Request.
 
-## PostgreSQL
+### Steps:
 
-```bash
-sudo apt install postgresql postgresql-contrib -y
-```
+1. Checkout Code
+2. Unit Tests
+3. Code Coverage
+4. SonarQube Scan
+5. Quality Gate Check
+6. Dependency Scan
+7. Secret Scan
 
-Start & enable:
-
-```bash
-sudo systemctl enable postgresql
-sudo systemctl start postgresql
-```
-
----
-
-## Create Sonar Database
-
-```bash
-sudo -u postgres psql
-```
-
-Inside psql:
-
-```sql
-CREATE DATABASE sonarqube;
-CREATE USER sonar WITH ENCRYPTED PASSWORD 'StrongPassword123';
-GRANT ALL PRIVILEGES ON DATABASE sonarqube TO sonar;
-\q
-```
+If any fail → PR blocked ❌
 
 ---
 
-# STEP 4 — Linux Kernel Tuning (MANDATORY)
+## 🔹 2️⃣ Dev Deployment Pipeline
 
-Edit:
+Triggered when PR merged to `dev`.
 
-```bash
-sudo nano /etc/sysctl.conf
-```
+### Steps:
 
-Add:
-
-```
-vm.max_map_count=262144
-fs.file-max=65536
-```
-
-Apply:
-
-```bash
-sudo sysctl -p
-```
-
-Also:
-
-```bash
-sudo nano /etc/security/limits.conf
-```
-
-Add:
-
-```
-sonar   -   nofile   65536
-sonar   -   nproc    4096
-```
+1. Build JAR
+2. Build Docker Image
+3. Trivy Scan Image
+4. Push to ECR
+5. Deploy to Dev K8s
+6. Smoke Test
 
 ---
 
-# STEP 5 — Create Sonar User
+## 🔹 3️⃣ Stage Pipeline
 
-```bash
-sudo adduser --system --no-create-home --group --disabled-login sonar
-```
+Triggered when PR to `stage`.
 
----
-
-# STEP 6 — Download SonarQube
-
-Go to:
-
-## SonarQube
-
-```bash
-cd /opt
-sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.4.1.88267.zip
-sudo apt install unzip -y
-sudo unzip sonarqube-10.4.1.88267.zip
-sudo mv sonarqube-10.4.1.88267 sonarqube
-```
-
-Permissions:
-
-```bash
-sudo chown -R sonar:sonar /opt/sonarqube
-```
+1. Rebuild
+2. Scan again
+3. Deploy to Stage cluster
+4. DAST scan (OWASP ZAP)
+5. Integration tests
 
 ---
 
-# STEP 7 — Configure SonarQube
+## 🔹 4️⃣ Production Pipeline
 
-Edit:
+Triggered manually or after approval.
 
-```bash
-sudo nano /opt/sonarqube/conf/sonar.properties
-```
-
-Uncomment & set:
-
-```
-sonar.jdbc.username=sonar
-sonar.jdbc.password=StrongPassword123
-sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
-
-sonar.web.host=127.0.0.1
-sonar.web.port=9000
-```
-
-Save.
+1. Rebuild (never promote old artifact blindly)
+2. Re-scan
+3. Push to Prod Registry
+4. Blue/Green Deployment
+5. Health Check
+6. Auto Rollback if failed
 
 ---
 
-# STEP 8 — Create Systemd Service
+# 🔐 Security Gates in Real Production
 
-```bash
-sudo nano /etc/systemd/system/sonarqube.service
-```
+### 🚫 Build Fails If:
 
-Paste:
-
-```
-[Unit]
-Description=SonarQube service
-After=network.target postgresql.service
-
-[Service]
-Type=forking
-User=sonar
-Group=sonar
-ExecStart=/opt/sonarqube/bin/linux-x86-64/sonar.sh start
-ExecStop=/opt/sonarqube/bin/linux-x86-64/sonar.sh stop
-LimitNOFILE=65536
-LimitNPROC=4096
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable:
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable sonarqube
-sudo systemctl start sonarqube
-```
-
-Check:
-
-```bash
-sudo systemctl status sonarqube
-```
+* Sonar Quality Gate fails
+* Critical vulnerability found
+* Dependency CVSS > 8
+* Secret detected
+* Container has HIGH/CRITICAL CVEs
 
 ---
 
-# STEP 9 — Install Reverse Proxy
+# 📦 Sample Enterprise Jenkinsfile (Realistic)
 
-Use:
+```groovy
+pipeline {
+    agent any
 
-## Nginx
+    tools {
+        maven 'MAVEN'
+        jdk 'JDK17'
+    }
 
-```bash
-sudo apt install nginx -y
-```
+    environment {
+        IMAGE_NAME = "devsecops-app"
+        REGISTRY = "xxxx.dkr.ecr.ap-south-1.amazonaws.com"
+    }
 
-Create config:
+    stages {
 
-```bash
-sudo nano /etc/nginx/sites-available/sonarqube
-```
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
 
-Paste:
+        stage('Unit Tests') {
+            steps {
+                sh 'mvn test'
+            }
+        }
 
-```
-server {
-    listen 80;
-    server_name your-domain.com;
+        stage('SonarQube Scan') {
+            steps {
+                withSonarQubeEnv('SONARQUBE_SERVER') {
+                    sh 'mvn clean verify sonar:sonar'
+                }
+            }
+        }
 
-    location / {
-        proxy_pass http://127.0.0.1:9000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
+        stage('Dependency Scan') {
+            steps {
+                sh 'dependency-check.sh --scan .'
+            }
+        }
+
+        stage('Build Artifact') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t $IMAGE_NAME:$BUILD_NUMBER .'
+            }
+        }
+
+        stage('Container Scan') {
+            steps {
+                sh 'trivy image --exit-code 1 --severity HIGH,CRITICAL $IMAGE_NAME:$BUILD_NUMBER'
+            }
+        }
+
+        stage('Push to Registry') {
+            steps {
+                sh '''
+                aws ecr get-login-password --region ap-south-1 | \
+                docker login --username AWS --password-stdin $REGISTRY
+                docker tag $IMAGE_NAME:$BUILD_NUMBER $REGISTRY/$IMAGE_NAME:$BUILD_NUMBER
+                docker push $REGISTRY/$IMAGE_NAME:$BUILD_NUMBER
+                '''
+            }
+        }
+
+        stage('Deploy to K8s') {
+            steps {
+                sh '''
+                kubectl set image deployment/myapp \
+                myapp=$REGISTRY/$IMAGE_NAME:$BUILD_NUMBER
+                '''
+            }
+        }
     }
 }
 ```
 
-Enable:
+---
 
-```bash
-sudo ln -s /etc/nginx/sites-available/sonarqube /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl restart nginx
+# 🏆 Real Production Practices
+
+### ✅ 1. Never store secrets in Jenkinsfile
+
+Use Vault / AWS Secrets Manager.
+
+### ✅ 2. Use Separate Clusters
+
+* Dev Cluster
+* Stage Cluster
+* Prod Cluster
+
+### ✅ 3. Use IAM Roles, not access keys
+
+### ✅ 4. Use GitOps for Production
+
+Use:
+
+* ArgoCD
+* Flux
+
+Instead of direct kubectl in Jenkins.
+
+---
+
+# 🧠 Advanced Production Add-ons
+
+* Infrastructure as Code → Terraform
+* Policy as Code → OPA / Kyverno
+* Runtime security → Falco
+* Auto rollback using readiness probe failure
+* Slack notifications
+* Jira ticket automation
+
+---
+
+# 🔥 REAL Enterprise Flow
+
 ```
-
-Now accessible via:
-
-```
-http://your-domain.com
+PR → CI Security Checks → Merge → Build → Scan → Push →
+CD → Deploy → Monitor → Alert → Rollback
 ```
 
 ---
 
-# 🚀 STEP 10 — Enable HTTPS (Production Required)
+If you want next level, I can give you:
 
-```bash
-sudo apt install certbot python3-certbot-nginx -y
-sudo certbot --nginx -d your-domain.com
-```
+* 🔹 AWS-based complete DevSecOps architecture
+* 🔹 Kubernetes production architecture
+* 🔹 GitOps based secure production flow
+* 🔹 Interview-level DevSecOps explanation
+* 🔹 Resume-ready architecture diagram explanation
 
-Now:
-
-```
-https://your-domain.com
-```
-
----
-
-# FINAL SECURITY
-
-AWS Security Group:
-
-Open only:
-
-* 22
-* 80
-* 443
-
-Close:
-
-* 9000 ❌
-
----
-
-# 🎯 Final Production Architecture
-
-```
-Internet
-   ↓
-HTTPS (443)
-   ↓
-Nginx
-   ↓
-SonarQube (9000 internal)
-   ↓
-PostgreSQL
-```
-
----
+Tell me what level you want 😎
