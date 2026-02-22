@@ -123,3 +123,30 @@ pipeline {
 | .NET                    | CLI          |
 | Container               | Trivy        |
 | Multi-language monorepo | CLI          |
+
+
+
+# Git Leaks:
+```
+wget https://github.com/gitleaks/gitleaks/releases/download/v8.30.0/gitleaks_8.30.0_darwin_x64.tar.gz
+tar -xvzf gitleaks_linux_x64.tar.gz
+sudo mv gitleaks /usr/local/bin/
+```
+Run scan local
+```
+gitleaks detect --source . --report-path gitleaks-report.json
+```
+
+```
+stage('Secret Scan') {
+    steps {
+        sh '''
+        gitleaks detect \
+        --source . \
+        --report-format json \
+        --report-path gitleaks-report.json
+        '''
+    }
+}
+```
+
