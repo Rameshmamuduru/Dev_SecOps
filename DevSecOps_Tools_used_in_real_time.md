@@ -28,6 +28,37 @@
 | **Incident Response**      | Alerting                   | Alertmanager            | PagerDuty                    |
 
 
+
+# Tools/pluggins used in pom:
+
+| **Category**                  | **Plugin/Tool**                                   | **Purpose / Use in Maven POM**                                              |
+| ----------------------------- | ------------------------------------------------- | --------------------------------------------------------------------------- |
+| **Build & Compile**           | `maven-compiler-plugin`                           | Compiles Java source code. You can specify JDK version.                     |
+|                               | `maven-resources-plugin`                          | Copies and filters resources (like properties, XMLs) into target directory. |
+|                               | `maven-clean-plugin`                              | Cleans `target/` directory before build.                                    |
+| **Packaging**                 | `maven-jar-plugin`                                | Packages compiled code into a JAR file.                                     |
+|                               | `maven-war-plugin`                                | Packages code as a WAR for web applications.                                |
+|                               | `maven-assembly-plugin`                           | Creates distributable packages with dependencies (e.g., ZIP, TAR).          |
+| **Testing**                   | `maven-surefire-plugin`                           | Runs unit tests (JUnit, TestNG) during `test` phase.                        |
+|                               | `maven-failsafe-plugin`                           | Runs integration tests in `integration-test` phase.                         |
+| **Code Quality / Analysis**   | `maven-checkstyle-plugin`                         | Checks Java code style against rules (Checkstyle).                          |
+|                               | `maven-pmd-plugin`                                | Detects potential bugs and code issues using PMD rules.                     |
+|                               | `maven-findbugs-plugin` / `spotbugs-maven-plugin` | Static analysis for bugs in code.                                           |
+|                               | `sonar-maven-plugin`                              | Sends code metrics to SonarQube for analysis.                               |
+| **Dependency Management**     | `maven-dependency-plugin`                         | Manages dependencies: copies, analyzes, or lists them.                      |
+|                               | `versions-maven-plugin`                           | Updates and checks for newer versions of dependencies/plugins.              |
+| **Site / Documentation**      | `maven-site-plugin`                               | Generates project site/documentation.                                       |
+|                               | `maven-javadoc-plugin`                            | Generates JavaDoc API documentation.                                        |
+| **Code Coverage**             | `jacoco-maven-plugin`                             | Measures code coverage for tests.                                           |
+| **Docker / Containerization** | `fabric8-maven-plugin`                            | Builds Docker images and deploys to Kubernetes/OpenShift.                   |
+|                               | `docker-maven-plugin`                             | Integrates Docker builds into Maven lifecycle.                              |
+| **Deployment / CI/CD**        | `maven-deploy-plugin`                             | Deploys artifacts to remote repository (like Nexus).                        |
+|                               | `maven-release-plugin`                            | Automates release process (tagging, versioning, deployment).                |
+| **Web / Frontend**            | `frontend-maven-plugin`                           | Integrates Node.js, NPM, Yarn build tasks into Maven.                       |
+| **Other Utilities**           | `exec-maven-plugin`                               | Executes system commands or Java programs during build.                     |
+|                               | `antrun-maven-plugin`                             | Runs Ant tasks inside Maven build.                                          |
+
+
 # 📦 Sample Enterprise Jenkinsfile (Realistic)
 
 ```groovy
