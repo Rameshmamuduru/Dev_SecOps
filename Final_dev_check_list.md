@@ -10,3 +10,15 @@
 | **Container Runtime**      | Falco, kube-bench                                           | Twistlock / Prisma Cloud, Aqua Runtime, Sysdig Secure                                           |
 | **Cloud Security**         | ScoutSuite, Prowler, Cloud Custodian                        | Prisma Cloud, Dome9, Check Point CloudGuard, Tenable.io                                         |
 | **Policy as Code**         | OPA (Open Policy Agent), Conftest                           | OPA Enterprise, Styra, Datree, Chef InSpec                                                      |
+
+
+## DAST Tools:
+| Tool               | Type                     | Usage                 |
+| ------------------ | ------------------------ | --------------------- |
+| Burp Suite         | Manual + Enterprise DAST | Deep security testing |
+| OWASP ZAP          | CI/CD DAST               | Automation pipelines  |
+| Acunetix           | Enterprise DAST          | Fast scanning         |
+| Netsparker/Invicti | Enterprise DAST          | Compliance-heavy orgs |
+| Veracode           | Full AppSec platform     | Governance            |
+| Checkmarx          | SAST + DAST              | Unified security      |
+| Rapid7 AppSec      | Cloud DAST               | SaaS apps             |
