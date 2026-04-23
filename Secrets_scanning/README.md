@@ -38,19 +38,8 @@ trufflehog git . --max_depth 50
 ```
 
 # GitGurdien:
-Good — now we’ll build a **clean, production-grade DevSecOps setup** with **all 3 layers properly aligned (no confusion, no overlap).**
 
-This is the kind of setup used in real companies.
-
-We’ll use:
-
-* GitGuardian
-* Jenkins
-* Git server controls (GitHub/GitLab)
-
----
-
-# 🚀 🧭 FINAL PRODUCTION ARCHITECTURE (3 LAYERS)
+## 🚀 🧭 FINAL PRODUCTION ARCHITECTURE (3 LAYERS)
 
 ```text id="a1"
           ┌──────────────────────────────┐
@@ -72,13 +61,13 @@ We’ll use:
 
 ---
 
-# 🔐 LAYER 1 — Developer Machine (OPTIONAL but recommended)
+## 🔐 LAYER 1 — Developer Machine (OPTIONAL but recommended)
 
-## 🎯 Purpose:
+### 🎯 Purpose:
 
 Prevent mistakes BEFORE commit.
 
-## Setup:
+### Setup:
 
 ```bash id="b1"
 pip install ggshield
@@ -86,7 +75,7 @@ ggshield auth login
 ggshield install
 ```
 
-## Result:
+### Result:
 
 ```text id="b2"
 git commit → scan runs → block if secret found
@@ -97,7 +86,7 @@ git commit → scan runs → block if secret found
 
 ---
 
-# 🚀 LAYER 2 — CI/CD (MANDATORY – REAL SECURITY GATE)
+## 🚀 LAYER 2 — CI/CD (MANDATORY – REAL SECURITY GATE)
 
 This is your **actual production control layer**
 
@@ -105,7 +94,7 @@ This is your **actual production control layer**
 
 ---
 
-## 🔧 Jenkins setup
+### 🔧 Jenkins setup
 
 ### Step 1: Store secret
 
@@ -160,7 +149,7 @@ pipeline {
 
 ---
 
-## 🎯 What this guarantees
+### 🎯 What this guarantees
 
 ✔ No secret reaches build
 ✔ No secret goes to artifact
@@ -168,13 +157,13 @@ pipeline {
 
 ---
 
-# 🌐 LAYER 3 — Central Monitoring (ALWAYS ON)
+## 🌐 LAYER 3 — Central Monitoring (ALWAYS ON)
 
 👉 GitGuardian Dashboard
 
 ---
 
-## What happens here:
+### What happens here:
 
 ✔ Scans ALL repos continuously
 ✔ Detects:
@@ -186,7 +175,7 @@ pipeline {
 
 ---
 
-## What you configure:
+### What you configure:
 
 ### 1. Repo integration
 
@@ -204,7 +193,7 @@ pipeline {
 
 ---
 
-# 🔁 FINAL REAL PRODUCTION FLOW
+## 🔁 FINAL REAL PRODUCTION FLOW
 
 ```text id="b4"
 Developer writes code
@@ -222,9 +211,9 @@ GitGuardian dashboard monitors continuously
 
 ---
 
-# ⚠️ REAL INDUSTRY RULES
+## ⚠️ REAL INDUSTRY RULES
 
-## ✔ Jenkins is ALWAYS mandatory
+### ✔ Jenkins is ALWAYS mandatory
 
 Because:
 
@@ -233,7 +222,7 @@ Because:
 
 ---
 
-## ✔ Pre-commit is optional
+### ✔ Pre-commit is optional
 
 Used for:
 
@@ -242,7 +231,7 @@ Used for:
 
 ---
 
-## ✔ Dashboard is ALWAYS on
+### ✔ Dashboard is ALWAYS on
 
 Used for:
 
@@ -252,7 +241,7 @@ Used for:
 
 ---
 
-# 🧠 SIMPLE MENTAL MODEL
+## 🧠 SIMPLE MENTAL MODEL
 
 ```text id="b5"
 Developer Layer → convenience
@@ -262,13 +251,13 @@ Dashboard → visibility + governance
 
 ---
 
-# 🎯 FINAL INTERVIEW ANSWER (PERFECT)
+## 🎯 FINAL INTERVIEW ANSWER (PERFECT)
 
 > “In production DevSecOps, secret detection is implemented in three layers. The first optional layer is pre-commit hooks using GitGuardian CLI to catch secrets locally. The second mandatory layer is CI/CD integration in Jenkins where ggshield scans the repository and fails the pipeline if secrets are found. The third layer is GitGuardian dashboard, which continuously monitors repositories for leaked or historical secrets and provides alerts and compliance reporting.”
 
 ---
 
-# 💡 SIMPLE MEMORY
+## 💡 SIMPLE MEMORY
 
 ```text id="b6"
 Pre-commit → optional safety
