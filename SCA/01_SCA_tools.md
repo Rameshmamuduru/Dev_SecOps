@@ -37,6 +37,7 @@
 Github native tool
 
 
+## Table
 | Feature               | OSV Scanner | Dependency-Check | Xray | Frogbot      |
 | --------------------- | ----------- | ---------------- | ---- | ------------ |
 | Vulnerability Scan    | ✅           | ✅                | ✅    | ✅ (via Xray) |
