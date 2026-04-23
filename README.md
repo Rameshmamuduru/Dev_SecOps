@@ -41,7 +41,7 @@ Absolutely! In **production-grade DevSecOps pipelines**, organizations often com
 | ------------------------- | ---------------------- | ---------------------- |
 | Dependency scanning (SCA) | OWASP Dependency-Check | Snyk, Black Duck, Mend |
 | Secrets scanning          | Gitleaks, TruffleHog   | GitGuardian            |
-| License compliance        | OWASP Dependency-Check | FOSSA, Black Duck      |
+| License compliance        | OWASP Dependency-Check,Syft + Grype | FOSSA, Black Duck      |
 
 ---
 
