@@ -36,6 +36,15 @@
 # 5. GitHub Dependabot:
 Github native tool
 
+# 6. Trivy:
+
+| Command        | Purpose                    |
+| -------------- | -------------------------- |
+| `trivy fs`     | Scan code + dependencies   |
+| `trivy image`  | Scan Docker images         |
+| `trivy config` | Scan IaC (Terraform, YAML) |
+
+
 
 ## Table
 | Feature               | OSV Scanner | Dependency-Check | Xray | Frogbot      |
