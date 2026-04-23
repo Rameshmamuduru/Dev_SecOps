@@ -1,12 +1,12 @@
-# ☁️ 🔐 IaC SCANNING TOOLS (REAL DEVSECOPS STACK)
+## ☁️ 🔐 IaC SCANNING TOOLS (REAL DEVSECOPS STACK)
 
 ---
 
-# 🟢 OPEN SOURCE (MOST USED IN CI/CD)
+## 🟢 OPEN SOURCE (MOST USED IN CI/CD)
 
 ---
 
-## 🔹 1. Trivy
+### 🔹 1. Trivy
 
 ### Category:
 
@@ -26,7 +26,7 @@ trivy config .
 
 ---
 
-## 🔹 2. Checkov
+### 🔹 2. Checkov
 
 ### Category:
 
@@ -46,11 +46,11 @@ checkov -d .
 
 ---
 
-# 🔵 ENTERPRISE TOOLS (REAL PRODUCTION GOVERNANCE)
+## 🔵 ENTERPRISE TOOLS (REAL PRODUCTION GOVERNANCE)
 
 ---
 
-## 🔹 1. Prisma Cloud
+### 🔹 1. Prisma Cloud
 
 ### Category:
 
@@ -65,7 +65,7 @@ checkov -d .
 
 ---
 
-## 🔹 2. Snyk
+### 🔹 2. Snyk
 
 ### Category:
 
@@ -86,7 +86,7 @@ snyk iac test
 
 ---
 
-# 🔁 FINAL COMPARISON (SAME FORMAT YOU WANTED)
+## 🔁 FINAL COMPARISON (SAME FORMAT YOU WANTED)
 
 | Type           | Tool         | Category                    | Why used                                            |
 | -------------- | ------------ | --------------------------- | --------------------------------------------------- |
@@ -97,13 +97,13 @@ snyk iac test
 
 ---
 
-# 🎯 FINAL SIMPLE INTERVIEW ANSWER
+## 🎯 FINAL SIMPLE INTERVIEW ANSWER
 
 > “For IaC scanning, the most widely used open-source tools are Trivy and Checkov, which help detect misconfigurations in Terraform, Kubernetes, and Helm. In enterprise environments, Prisma Cloud and Snyk are commonly used for advanced cloud security posture management, policy enforcement, and CI/CD integration.”
 
 ---
 
-# 💡 MEMORY TRICK
+## 💡 MEMORY TRICK
 
 ```text id="i4"
 Open Source → Trivy + Checkov
