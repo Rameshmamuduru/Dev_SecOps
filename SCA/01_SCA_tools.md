@@ -80,6 +80,15 @@ Github native tool
 **Security is continuous, not one-time scan, Needs policy enforcement + governance**
 
 
+## Tools Comparision Table:
+
+| Tool                   | What it does                       | Key Capabilities                                                                                                                                | CI/CD Integration                   | Open Source?                                  |
+| ---------------------- | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | --------------------------------------------- |
+| Trivy                  | Multi-purpose security scanner     | ✔ Dependency (SCA) scanning<br>✔ Container image scanning<br>✔ IaC misconfig scan<br>✔ Secrets detection<br>✔ SBOM generation                   | ✔ Jenkins<br>✔ GitHub Actions       | ✅ Yes                                         |
+| OWASP Dependency-Check | Pure SCA tool                      | ✔ Detects CVEs in dependencies<br>✔ Detailed CVSS scoring<br>✔ HTML/JSON reports<br>✔ NVD-based analysis                                        | ✔ Jenkins<br>✔ Maven/Gradle plugins | ✅ Yes                                         |
+| GitHub Dependabot      | Dependency monitoring & auto-fix   | ✔ Detects vulnerable dependencies<br>✔ Auto PR updates<br>✔ Version upgrades<br>✔ Alerts in repo                                                | ✔ Native in GitHub (with Actions)   | ⚠️ Partially (service, not fully open source) |
+| JFrog Xray             | Enterprise SCA & artifact scanning | ✔ Dependency vulnerability scanning<br>✔ Binary scanning<br>✔ License compliance<br>✔ Policy enforcement<br>✔ Deep integration with Artifactory | ✔ Jenkins<br>✔ GitHub<br>✔ CI tools | ❌ No (Commercial)                             |
+| JFrog Frogbot          | Automated PR security scanning     | ✔ Scans dependencies in PRs<br>✔ Comments vulnerabilities<br>✔ Integrates with Xray<br>✔ Shift-left security                                    | ✔ GitHub / GitLab PRs               | ⚠️ Free tool but tied to JFrog ecosystem      |
 
 
 
