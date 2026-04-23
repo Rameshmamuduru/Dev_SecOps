@@ -33,6 +33,9 @@
 
 **It is not a scanner itself and It uses Xray in the backend**
 
+# 5. GitHub Dependabot:
+Github native tool
+
 
 | Feature               | OSV Scanner | Dependency-Check | Xray | Frogbot      |
 | --------------------- | ----------- | ---------------- | ---- | ------------ |
