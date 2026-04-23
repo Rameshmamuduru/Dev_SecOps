@@ -44,6 +44,9 @@ Github native tool
 | `trivy image`  | Scan Docker images         |
 | `trivy config` | Scan IaC (Terraform, YAML) |
 
+# 7. Grype + Syft (deep dependency scan)
+For Deep Dependency Scanning
+
 
 
 ## Table
