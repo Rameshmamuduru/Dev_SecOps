@@ -132,3 +132,9 @@ Dependency Scan (Snyk)
 Artifact Creation
 ```
 
+| Tool      | Type                     | Usage                             |
+| --------- | ------------------------ | --------------------------------- |
+| SonarQube | Open source + enterprise | Most common CI/CD SAST            |
+| Semgrep   | Open source              | Modern DevSecOps SAST             |
+| Checkmarx | Commercial               | Banking / enterprise security     |
+| Fortify   | Commercial               | Large enterprise / legacy systems |
