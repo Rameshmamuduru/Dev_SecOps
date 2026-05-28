@@ -1,3 +1,4 @@
+```
 Developer Commit
         ↓
 Pre-commit checks (local)
@@ -25,3 +26,4 @@ CI Pipeline Trigger (Jenkins / GitHub Actions)
 9. Approval / Quality Gate
         ↓
 Ready for CD (Deployment pipeline)
+```
